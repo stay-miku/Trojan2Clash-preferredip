@@ -1,0 +1,10 @@
+#黑名单模式,只有符合规则的流量走代理
+rules:
+  - RULE-SET,applications,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,reject,节点选择
+  - RULE-SET,tld-not-cn,节点选择
+  - RULE-SET,gfw,节点选择
+  - RULE-SET,greatfire,节点选择
+  - RULE-SET,telegramcidr,节点选择
+  - MATCH,DIRECT
