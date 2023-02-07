@@ -4,7 +4,7 @@
 def main():
     server = input("服务器地址:")
 
-    port = input("端口:")
+    port = "443"
 
     password = input("密码:")
 
@@ -12,14 +12,14 @@ def main():
 
     sni = input("sni:")
 
-    is_ws = input("是否使用ws(Y/n):")
+    is_ws = "y"
 
     proxy = "\n    port: " + port + "\n    password: " + password + "\n    sni: " + sni + "\n    udp: true"
 
     if is_ws == "y" or is_ws == "":
         path = input("ws路径:")
 
-        host = input("ws Host:")
+        host = sni
 
         proxy += "\n    network: ws\n    ws-opts:\n      path: " + path + "\n      headers:\n        Host: " + host
 
@@ -32,7 +32,7 @@ def main():
     clash = open("./clash.yaml", "w", encoding="utf-8")
 
     clash.write(
-        "port: 7890\nsocks-port: 7891\nmode: Rule\nlog-level: info\nproxies:\n" + "  - name: " + remark + "\n    type: trojan\n    server: " + server + proxy)
+        "port: 7890\nsocks-port: 7891\nmode: Rule\nlog-level: info\nproxies:\n" + "  - name: " + remark + "\n    type: trojan\n    server: " + server + "\n    port: " + port + "\n    password: " + password + "\n    sni: " + sni + "\n    udp: true")
 
     for ip in ips:
         ip = ip.rstrip()
